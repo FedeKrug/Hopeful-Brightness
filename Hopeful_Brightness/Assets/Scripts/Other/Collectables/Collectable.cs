@@ -2,7 +2,11 @@ namespace Game.Interfaces
 {
 	public interface Collectable
 	{
-		public void Interact();
+		public void Collect();
 	}
 
+	public interface Interactable
+	{
+		public void Interact();
+	}
 }

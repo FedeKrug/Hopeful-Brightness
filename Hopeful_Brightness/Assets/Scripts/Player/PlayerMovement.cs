@@ -23,19 +23,18 @@ namespace Game.Player
 			if (_moveInput.x < 0)
 			{
 				_spriteR.flipX = true;
-			}
-			else
-			{
-				_spriteR.flipX = false;
-			}
-			if (_moveInput.x != 0)
-			{
 				_anim.SetBool("IsRunning", true);
 			}
-			else
+			else if(_moveInput.x > 0)
+			{
+				_spriteR.flipX = false;
+				_anim.SetBool("IsRunning", true);
+			}
+			if (_moveInput.x ==0)
 			{
 				_anim.SetBool("IsRunning", false);
 			}
+			
 		}
 
 		void FixedUpdate()

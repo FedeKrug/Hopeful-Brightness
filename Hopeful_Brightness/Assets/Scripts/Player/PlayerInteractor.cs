@@ -10,7 +10,11 @@ public class PlayerInteractor : MonoBehaviour
 	{
 		if (collision.GetComponent<Collectable>() != null)
 		{
-			collision.GetComponent<Collectable>().Interact();
+			collision.GetComponent<Collectable>().Collect();
+		}
+		if (collision.GetComponent<Interactable>() != null)
+		{
+			collision.GetComponent<Interactable>().Interact();
 		}
 	}
 }

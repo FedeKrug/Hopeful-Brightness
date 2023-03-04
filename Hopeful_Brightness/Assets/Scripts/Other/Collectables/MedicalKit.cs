@@ -10,7 +10,7 @@ public class MedicalKit : MonoBehaviour, Collectable
 	[SerializeField] private SpriteRenderer _spriteR;
 	[SerializeField] private AudioClip _medicalKitSound;
 	[SerializeField] private GameObject _particleExplosion;
-	public void Interact()
+	public void Collect()
 	{
 		IncreaseHealth();
 		StartCoroutine(CollectionEffect());
