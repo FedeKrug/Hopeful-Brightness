@@ -11,6 +11,7 @@ namespace Game.Player
 		[SerializeField, Range(0, 100)] private float _movementSpeed;
 		[SerializeField] private Rigidbody2D _rb2d;
 		[SerializeField] private SpriteRenderer _spriteR;
+		[SerializeField] private Animator _anim;
 		private Vector2 _moveInput;
 		void Awake()
 		{
@@ -26,6 +27,14 @@ namespace Game.Player
 			else
 			{
 				_spriteR.flipX = false;
+			}
+			if (_moveInput.x != 0)
+			{
+				_anim.SetBool("IsRunning", true);
+			}
+			else
+			{
+				_anim.SetBool("IsRunning", false);
 			}
 		}
 
