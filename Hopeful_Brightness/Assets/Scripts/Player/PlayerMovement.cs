@@ -12,11 +12,12 @@ namespace Game.Player
 		[SerializeField] private Rigidbody2D _rb2d;
 		[SerializeField] private SpriteRenderer _spriteR;
 		[SerializeField] private Animator _anim;
+		[SerializeField] private string _hurtAnimation, _deathAnimation;
+		[SerializeField] private AudioSource _aSource;
+		[SerializeField] private AudioClip _hurtSound, _deathSound;
+		[SerializeField] private float _timeOfInvencible;
 		private Vector2 _moveInput;
-		void Awake()
-		{
 
-		}
 		private void Update()
 		{
 			_moveInput.x = Input.GetAxis("Horizontal");
@@ -46,9 +47,45 @@ namespace Game.Player
 		{
 			_rb2d.velocity = new Vector2(_moveInput.x * _movementSpeed * Time.fixedDeltaTime, _rb2d.velocity.y);
 		}
-		public void HurtAnimation()
+		public void Hurt()
 		{
-			_anim.Play("HurtAnimation");
+			StartCoroutine(HurtBehaiviours());
+		}
+		public void Death()
+		{
+			StartCoroutine(Die());
+		}
+
+		IEnumerator Die()
+		{
+
+			yield return null;
+			_anim.Play(_deathAnimation);
+			_aSource.PlayOneShot(_deathSound);
+			while (_aSource.isPlaying)
+			{
+				yield return null;
+
+			}
+		}
+
+		IEnumerator HurtBehaiviours()
+		{
+			yield return null;
+			_aSource.PlayOneShot(_hurtSound);
+			gameObject.layer = 9; //TODO: cambiar a una layer invencible
+			while (_aSource.isPlaying)
+			{
+				_spriteR.enabled = false;
+				yield return null;
+				_spriteR.enabled = true;
+
+			}
+			_spriteR.enabled = true;
+			yield return new WaitForSeconds(_timeOfInvencible);
+			gameObject.layer = 8; //TODO: buscar la layer del player y cambiar este 0
+
+
 		}
 
 	}

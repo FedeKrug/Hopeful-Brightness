@@ -11,8 +11,8 @@ namespace Game.Player
 		[SerializeField] private Rigidbody2D _rb2d;
 		[SerializeField] private Animator _anim;
 		[SerializeField] private float _timeOfJumping;
-		[SerializeField] private bool _onJump;
-		[SerializeField] private bool _falling = false;
+		//[SerializeField] private bool _onJump;
+		//[SerializeField] private bool _falling = false;
 		[SerializeField] private FloorDetector _floorDetector;
 		private void Update()
 		{
@@ -23,18 +23,18 @@ namespace Game.Player
 			}
 			if (Input.GetKeyDown(KeyCode.Space) && _floorDetector.floorDetected)
 			{
-				Jump();
+				Jump(_jumpForce);
 			}
 
 
 		}
 
-		private void Jump()
+		public void Jump(float jumpingForce)
 		{
 			//_rb2d.AddForce(new Vector2(_rb2d.velocity.x, _jumpForce * Time.deltaTime), ForceMode2D.Impulse);
-			_rb2d.velocity = new Vector2(_rb2d.velocity.x, _jumpForce);
-			_onJump = true;
-			_falling = false;
+			_rb2d.velocity = new Vector2(_rb2d.velocity.x, jumpingForce);
+			//_onJump = true;
+			//_falling = false;
 			_anim.SetBool("OnJump", true);
 			_anim.SetBool("Faliing", false);
 			StartCoroutine(MakeTheJump());
@@ -43,8 +43,8 @@ namespace Game.Player
 		IEnumerator MakeTheJump()
 		{
 			yield return new WaitForSeconds(_timeOfJumping);
-			_onJump = false;
-			_falling = true;
+			//_onJump = false;
+			//_falling = true;
 			yield return null;
 			_anim.SetBool("OnJump", false);
 			_anim.SetBool("Falling", true);

@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Platform
+  - Limit
+  - Destroyer
   layers:
   - Default
   - TransparentFX
@@ -14,8 +16,8 @@ TagManager:
   - UI
   - Interactables
   - Collectables
-  - 
-  - 
+  - Player
+  - Invencible
   - 
   - 
   - 
@@ -39,11 +41,11 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
-    locked: 0
   - name: Background
     uniqueID: 3514909547
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0
   - name: Spikes
     uniqueID: 3423131937
