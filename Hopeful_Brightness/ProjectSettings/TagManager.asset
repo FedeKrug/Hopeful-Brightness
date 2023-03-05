@@ -45,6 +45,12 @@ TagManager:
   - name: Background
     uniqueID: 3514909547
     locked: 0
+  - name: Spikes
+    uniqueID: 3423131937
+    locked: 0
+  - name: Collectables
+    uniqueID: 402208445
+    locked: 0
   - name: Foreground
     uniqueID: 2646062579
     locked: 0

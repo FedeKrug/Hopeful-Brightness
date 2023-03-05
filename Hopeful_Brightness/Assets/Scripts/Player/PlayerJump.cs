@@ -31,7 +31,8 @@ namespace Game.Player
 
 		private void Jump()
 		{
-			_rb2d.AddForce(new Vector2(_rb2d.velocity.x, _jumpForce * Time.deltaTime), ForceMode2D.Impulse);
+			//_rb2d.AddForce(new Vector2(_rb2d.velocity.x, _jumpForce * Time.deltaTime), ForceMode2D.Impulse);
+			_rb2d.velocity = new Vector2(_rb2d.velocity.x, _jumpForce);
 			_onJump = true;
 			_falling = false;
 			_anim.SetBool("OnJump", true);

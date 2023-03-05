@@ -19,9 +19,30 @@ public class PlayerManager : MonoBehaviour
 		}
     }
 
-   
-    void Update()
+	private void OnEnable()
+	{
+        EventManager.instance.hurtPlayerEvent.AddListener(TakeDamageHandler);
+        EventManager.instance.increaseHealthEvent.AddListener(IncreaseHealthHandler);
+	}
+
+	private void OnDisable()
+	{
+        EventManager.instance.hurtPlayerEvent.RemoveListener(TakeDamageHandler);
+        EventManager.instance.increaseHealthEvent.RemoveListener(IncreaseHealthHandler);
+    }
+
+
+	void Update()
     {
         
+    }
+
+    public void TakeDamageHandler(float damage)
+	{
+        playerHealth.value -= damage;
+	}
+    public void IncreaseHealthHandler(float healthPoints)
+    {
+        PlayerManager.instance.playerHealth.value += healthPoints;
     }
 }

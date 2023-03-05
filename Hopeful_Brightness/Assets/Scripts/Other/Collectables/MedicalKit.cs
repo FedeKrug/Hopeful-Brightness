@@ -10,20 +10,20 @@ public class MedicalKit : MonoBehaviour, Collectable
 	[SerializeField] private SpriteRenderer _spriteR;
 	[SerializeField] private AudioClip _medicalKitSound;
 	[SerializeField] private GameObject _particleExplosion;
+
 	public void Collect()
 	{
-		IncreaseHealth();
+		EventManager.instance.increaseHealthEvent.Invoke(_healthPoints);
 		StartCoroutine(CollectionEffect());
-	}
-
-	public void IncreaseHealth()
-	{
-		PlayerManager.instance.playerHealth.value += _healthPoints;
 	}
 
 	IEnumerator CollectionEffect()
 	{
-		_spriteR.enabled = false;
+		if (_spriteR)
+		{
+			_spriteR.enabled = false;
+
+		}
 		_aSource.PlayOneShot(_medicalKitSound);
 		gameObject.layer = 10; //TODO: create a new layer for stuff player could interact or collide
 		_particleExplosion.SetActive(true);

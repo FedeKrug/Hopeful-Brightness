@@ -13,9 +13,4 @@ namespace Game.Enemies
 
 
 	}
-
-	public class Obstacle : MonoBehaviour
-	{
-
-	}
 }

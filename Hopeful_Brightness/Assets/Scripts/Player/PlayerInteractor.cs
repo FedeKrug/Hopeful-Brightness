@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class PlayerInteractor : MonoBehaviour
 {
+
+	
+
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (collision.GetComponent<Collectable>() != null)

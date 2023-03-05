@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
-
+using UnityEngine.Events;
 
 namespace Game.Player
 {
 	public class PlayerMovement : MonoBehaviour
 	{
-		[SerializeField, Range(0, 100)] private float _movementSpeed;
+		[SerializeField, Range(0, 500)] private float _movementSpeed;
 		[SerializeField] private Rigidbody2D _rb2d;
 		[SerializeField] private SpriteRenderer _spriteR;
 		[SerializeField] private Animator _anim;
@@ -25,16 +25,16 @@ namespace Game.Player
 				_spriteR.flipX = true;
 				_anim.SetBool("IsRunning", true);
 			}
-			else if(_moveInput.x > 0)
+			else if (_moveInput.x > 0)
 			{
 				_spriteR.flipX = false;
 				_anim.SetBool("IsRunning", true);
 			}
-			if (_moveInput.x ==0)
+			if (_moveInput.x == 0)
 			{
 				_anim.SetBool("IsRunning", false);
 			}
-			
+
 		}
 
 		void FixedUpdate()
@@ -46,6 +46,10 @@ namespace Game.Player
 		{
 			_rb2d.velocity = new Vector2(_moveInput.x * _movementSpeed * Time.fixedDeltaTime, _rb2d.velocity.y);
 		}
+		public void HurtAnimation()
+		{
+			_anim.Play("HurtAnimation");
+		}
+
 	}
 }
-
