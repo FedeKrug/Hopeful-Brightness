@@ -37,6 +37,8 @@ namespace Game.Enemies
 			{
 				_onLimit = !_onLimit;
 			}
+
+			
 		}
 	}
 }

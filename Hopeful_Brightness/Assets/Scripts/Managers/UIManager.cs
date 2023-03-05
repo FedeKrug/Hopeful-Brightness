@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
 	[SerializeField] private Image _healthBar;
-	[SerializeField] private float _maxHealth; 
+	public float maxHealth; 
 	#region Singleton & Suscribe / Unsuscribe Events
 	public static UIManager instance;
 	void Awake()
@@ -31,7 +31,7 @@ public class UIManager : MonoBehaviour
 
 	public void HealthUIHandler( float playerHealth)
 	{
-		_healthBar.fillAmount = playerHealth/_maxHealth;
+		_healthBar.fillAmount = playerHealth/maxHealth;
 	}
 
 	

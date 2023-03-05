@@ -74,11 +74,12 @@ namespace Game.Player
 			yield return null;
 			_aSource.PlayOneShot(_hurtSound);
 			gameObject.layer = 9; //TODO: cambiar a una layer invencible
+			_spriteR.enabled = false;
+			yield return null;
+			_spriteR.enabled = true;
 			while (_aSource.isPlaying)
 			{
-				_spriteR.enabled = false;
 				yield return null;
-				_spriteR.enabled = true;
 
 			}
 			_spriteR.enabled = true;

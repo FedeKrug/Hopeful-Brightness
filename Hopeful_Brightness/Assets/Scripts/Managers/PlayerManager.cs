@@ -21,6 +21,7 @@ public class PlayerManager : MonoBehaviour
 		{
             Destroy(gameObject);
 		}
+        StartCoroutine(DrainLife());
     }
 
 	private void OnEnable()
@@ -41,6 +42,11 @@ public class PlayerManager : MonoBehaviour
 	void Update()
     {
         EventManager.instance.healthUIEvent.Invoke(playerHealth.value);
+        if (playerHealth.value> UIManager.instance.maxHealth)
+		{
+            playerHealth.value = UIManager.instance.maxHealth;
+
+        }
     }
 
     public void TakeDamageHandler(float damage)
@@ -56,6 +62,7 @@ public class PlayerManager : MonoBehaviour
 		if (playerHealth.value <=0)
 		{
             _playerRef.Death();
+            StopCoroutine(DrainLife());
 		}
 	}
 
@@ -64,4 +71,11 @@ public class PlayerManager : MonoBehaviour
         playerHealth.value += healthPoints;
       //  EventManager.instance.healthUIEvent.Invoke(playerHealth.value);
     }
+    IEnumerator DrainLife()
+	{
+        yield return new WaitForSeconds(0.5f);
+        playerHealth.value -= 0.5f;
+        CheckDeaht();
+        StartCoroutine(DrainLife());
+	}
 }
