@@ -1,7 +1,8 @@
-﻿
+﻿using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.Events;
 
+[DefaultExecutionOrder(-10)]
 public class EventManager : MonoBehaviour
 {
 	#region Singleton
@@ -23,6 +24,10 @@ public class EventManager : MonoBehaviour
 
 	public HealthEvent hurtPlayerEvent = new HealthEvent();
 	public HealthEvent increaseHealthEvent = new HealthEvent();
+
+	public HealthUIEvent healthUIEvent = new HealthUIEvent();
 }
 
 public class HealthEvent : UnityEvent <float>{ }
+
+public class HealthUIEvent : UnityEvent< float> { }

@@ -4,9 +4,10 @@ using UnityEngine;
 using Game.SO;
 public class PlayerManager : MonoBehaviour
 {
-    public static PlayerManager instance;
     public FloatSO playerHealth;
-
+    
+    #region Singleton & Suscribe / Unsuscribe Events
+    public static PlayerManager instance;
     void Awake()
     {
         if (instance == null)
@@ -31,18 +32,22 @@ public class PlayerManager : MonoBehaviour
         EventManager.instance.increaseHealthEvent.RemoveListener(IncreaseHealthHandler);
     }
 
+	#endregion
+
 
 	void Update()
     {
-        
+        EventManager.instance.healthUIEvent.Invoke(playerHealth.value);
     }
 
     public void TakeDamageHandler(float damage)
 	{
         playerHealth.value -= damage;
+       // EventManager.instance.healthUIEvent.Invoke(playerHealth.value);
 	}
     public void IncreaseHealthHandler(float healthPoints)
     {
-        PlayerManager.instance.playerHealth.value += healthPoints;
+        playerHealth.value += healthPoints;
+      //  EventManager.instance.healthUIEvent.Invoke(playerHealth.value);
     }
 }
