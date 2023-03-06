@@ -9,13 +9,16 @@ namespace Game.Player
 	public class PlayerMovement : MonoBehaviour
 	{
 		[SerializeField, Range(0, 500)] private float _movementSpeed;
-		[SerializeField] private Rigidbody2D _rb2d;
+		public  Rigidbody2D rb2d;
 		[SerializeField] private SpriteRenderer _spriteR;
 		[SerializeField] private Animator _anim;
-		[SerializeField] private string _hurtAnimation, _deathAnimation;
+		[SerializeField] private string  _deathAnimation;
 		[SerializeField] private AudioSource _aSource;
 		[SerializeField] private AudioClip _hurtSound, _deathSound;
 		[SerializeField] private float _timeOfInvencible;
+		[SerializeField] private GameObject _looseScreen;
+
+		private bool _dead;
 		private Vector2 _moveInput;
 
 		private void Update()
@@ -45,7 +48,7 @@ namespace Game.Player
 
 		private void Move()
 		{
-			_rb2d.velocity = new Vector2(_moveInput.x * _movementSpeed * Time.fixedDeltaTime, _rb2d.velocity.y);
+			rb2d.velocity = new Vector2(_moveInput.x * _movementSpeed * Time.fixedDeltaTime, rb2d.velocity.y);
 		}
 		public void Hurt()
 		{
@@ -53,7 +56,12 @@ namespace Game.Player
 		}
 		public void Death()
 		{
-			StartCoroutine(Die());
+			if (!_dead)
+			{
+				StartCoroutine(Die());
+
+			}
+			else return;
 		}
 
 		IEnumerator Die()
@@ -62,11 +70,10 @@ namespace Game.Player
 			yield return null;
 			_anim.Play(_deathAnimation);
 			_aSource.PlayOneShot(_deathSound);
-			while (_aSource.isPlaying)
-			{
-				yield return null;
-
-			}
+			_dead = true;
+			yield return new WaitForSeconds(0.8f);
+			_looseScreen.SetActive(true);
+			Time.timeScale = 0;
 		}
 
 		IEnumerator HurtBehaiviours()
